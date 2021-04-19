@@ -24,7 +24,7 @@ class RomanNumeralConverter:
         number_of_digits = math.floor(temp) + 1
         return number_of_digits
 
-    def split_number_into_digits(self, number: int) -> list[int]:
+    def split_number_into_digits_and_exponent(self, number: int) -> list[int]:
         base = 10
         number_of_digits = self.calculate_number_of_digits(number, base)
 
@@ -33,7 +33,7 @@ class RomanNumeralConverter:
         for exponent in reversed(range(number_of_digits)):
             digit_number = math.floor(temp_number / base ** exponent) * base ** exponent
             temp_number -= digit_number
-            digit_list.append(digit_number)
+            digit_list.append((digit_number, exponent))
 
         return digit_list
 
@@ -55,11 +55,13 @@ class RomanNumeralConverter:
 
     def convert_to_numeral_string(self, base: int = 10) -> str:
         user_input = self.get_user_input()
-        digit_list = self.split_number_into_digits(user_input)
+        digit_exponent_list = self.split_number_into_digits_and_exponent(user_input)
         roman_numeral_string = ''
-        for digit in digit_list:
-            exponent = self.calculate_number_of_digits(digit, base)
-            string_for_digit = self.convert_digit_from_base_to_numeral_string(digit, base**(exponent-1))
+        for (digit, exponent) in digit_exponent_list:
+            string_for_digit = self.convert_digit_from_base_to_numeral_string(digit, base**(exponent))
             roman_numeral_string += string_for_digit
         return roman_numeral_string
 
+if __name__ == '__main__':
+    rmc = RomanNumeralConverter()
+    print(rmc.convert_to_numeral_string())

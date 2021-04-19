@@ -23,13 +23,13 @@ class Test_RomanNumeralConverter(TestCase):
     def test_numeral_string_input_returned_as_integer_value(self, input):
         self.assertEqual(115, self.rmc.get_user_input())
 
-    def test_split_number_into_digit_list(self):
-        self.assertEqual([100, 10, 1], self.rmc.split_number_into_digits(111))
-        self.assertEqual([10, 1], self.rmc.split_number_into_digits(11))
-        self.assertEqual([50, 4], self.rmc.split_number_into_digits(54))
-        self.assertEqual([6], self.rmc.split_number_into_digits(6))
-        self.assertEqual([1000, 400, 80, 9], self.rmc.split_number_into_digits(1489))
-        self.assertEqual([800, 0, 0], self.rmc.split_number_into_digits(800))
+    def test_split_number_into_digits_and_exponents_list(self):
+        self.assertEqual([(100, 2), (10, 1) , (1, 0)], self.rmc.split_number_into_digits_and_exponent(111))
+        self.assertEqual([(10, 1), (1, 0)], self.rmc.split_number_into_digits_and_exponent(11))
+        self.assertEqual([(50, 1), (4, 0)], self.rmc.split_number_into_digits_and_exponent(54))
+        self.assertEqual([(6, 0)], self.rmc.split_number_into_digits_and_exponent(6))
+        self.assertEqual([(1000, 3), (400, 2), (80, 1), (9, 0)], self.rmc.split_number_into_digits_and_exponent(1489))
+        self.assertEqual([(800, 2), (0, 1), (0, 0)], self.rmc.split_number_into_digits_and_exponent(800))
 
     def test_convert_first_digit_to_numeral_string(self):
         base = 1
@@ -95,11 +95,13 @@ class Test_RomanNumeralConverter(TestCase):
         self.assertEqual(8, self.rmc.calculate_number_of_digits(255, base))
         self.assertEqual(10, self.rmc.calculate_number_of_digits(1023, base))
 
-    @mock.patch('builtins.input', side_effect=['11', '154', '1874'])
+    @mock.patch('builtins.input', side_effect=['11', '154', '1874', '10', '200'])
     def test_converting_combined_digits(self, input):
         self.assertEqual('XI', self.rmc.convert_to_numeral_string())
         self.assertEqual('CLIV', self.rmc.convert_to_numeral_string())
         self.assertEqual('MDCCCLXXIV', self.rmc.convert_to_numeral_string())
+        self.assertEqual('X', self.rmc.convert_to_numeral_string())
+        self.assertEqual('CC', self.rmc.convert_to_numeral_string())
     
 
 
