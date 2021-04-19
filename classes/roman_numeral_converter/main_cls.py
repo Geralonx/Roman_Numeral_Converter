@@ -61,7 +61,7 @@ class RomanNumeralConverter:
             string_for_digit = self.convert_digit_from_base_to_numeral_string(digit, base**(exponent))
             roman_numeral_string += string_for_digit
         return roman_numeral_string
-
+ 
 if __name__ == '__main__':
     rmc = RomanNumeralConverter()
     print(rmc.convert_to_numeral_string())
