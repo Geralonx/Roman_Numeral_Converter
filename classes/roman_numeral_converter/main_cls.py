@@ -1,7 +1,8 @@
 import math
 
 class RomanNumeralConverter:
-
+    
+    MAX_INTEGER_SUPPORT = 3999
     NUMERAL_KEYS = {
         1:   'I',
         5:   'V',
@@ -13,10 +14,9 @@ class RomanNumeralConverter:
     }
 
     def get_user_input(self) -> int:
-        max_integer_support = 3999
         user_input = int(input("Input: "))
-        if user_input > max_integer_support:
-            raise ValueError(f"This Roman Numeral Converter just supports numbers from 1-{max_integer_support}.")
+        if user_input > self.MAX_INTEGER_SUPPORT:
+            raise ValueError(f"This Roman Numeral Converter just supports numbers from 1-{self.MAX_INTEGER_SUPPORT}.")
         return user_input
 
     def calculate_number_of_digits(self, number: int, base: int = 10) -> int:
@@ -61,7 +61,7 @@ class RomanNumeralConverter:
             string_for_digit = self.convert_digit_from_base_to_numeral_string(digit, base**(exponent))
             roman_numeral_string += string_for_digit
         return roman_numeral_string
-
+ 
 if __name__ == '__main__':
     rmc = RomanNumeralConverter()
     print(rmc.convert_to_numeral_string())
