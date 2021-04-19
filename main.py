@@ -9,7 +9,7 @@ def main():
         print("\n\nRoman Numeral Converter. Please make your Input.")
         result = rmc.convert_to_numeral_string()
         print(f"Your Number is {result!r} as a Roman Numeral")
-        not_done = input("Continue? (1/0): ")
+        not_done = int(input("Continue? (1/0): "))
 
 
 if __name__ == '__main__':
