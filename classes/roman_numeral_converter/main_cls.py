@@ -14,9 +14,17 @@ class RomanNumeralConverter:
     }
 
     def get_user_input(self) -> int:
-        user_input = int(input("Input: "))
-        if user_input > self.MAX_INTEGER_SUPPORT:
-            raise ValueError(f"This Roman Numeral Converter just supports numbers from 1-{self.MAX_INTEGER_SUPPORT}.")
+        valie_input = False
+        while not valie_input:
+            try:
+                user_input = int(input("Input: "))
+            except ValueError:
+                print("Your input needs to be a numeral.")
+                continue
+            valie_input = True
+            if user_input > self.MAX_INTEGER_SUPPORT:
+                valie_input = False
+                raise ValueError(f"This Roman Numeral Converter just supports numbers from 1-{self.MAX_INTEGER_SUPPORT}.")
         return user_input
 
     def calculate_number_of_digits(self, number: int, base: int = 10) -> int:
@@ -64,4 +72,5 @@ class RomanNumeralConverter:
  
 if __name__ == '__main__':
     rmc = RomanNumeralConverter()
-    print(rmc.convert_to_numeral_string())
+    # print(rmc.convert_to_numeral_string())
+    rmc.get_user_input()

@@ -10,10 +10,11 @@ class Test_RomanNumeralConverter(TestCase):
     def setUp(self):
         self.rmc = RomanNumeralConverter()
 
-    @mock.patch('builtins.input', side_effect=['Cat'])
-    def test_non_numeral_input_will_throw_ValueError(self, input):
-        with self.assertRaises(ValueError):
-            self.rmc.get_user_input()
+
+    @mock.patch('builtins.input', side_effect=['Cat', '10'])
+    def test_after_non_numeral_input_followed_by_numeral_input_will_be_called_twice(self, input):
+        self.rmc.get_user_input()
+        self.assertEqual(input.call_count, 2)
 
     @mock.patch('builtins.input', side_effect=['10'])
     def test_numeral_string_input_will_return_integer_type(self, input):
