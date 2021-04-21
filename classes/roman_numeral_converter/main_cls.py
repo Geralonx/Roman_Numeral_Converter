@@ -14,16 +14,16 @@ class RomanNumeralConverter:
     }
 
     def get_user_input(self) -> int:
-        valie_input = False
-        while not valie_input:
+        valid_input = False
+        while not valid_input:
             try:
                 user_input = int(input("Input: "))
             except ValueError:
                 print("Your input needs to be a numeral.")
                 continue
-            valie_input = True
+            valid_input = True
             if user_input > self.MAX_INTEGER_SUPPORT:
-                valie_input = False
+                valid_input = False
                 raise ValueError(f"This Roman Numeral Converter just supports numbers from 1-{self.MAX_INTEGER_SUPPORT}.")
         return user_input
 
